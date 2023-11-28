@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./ProductList.css";
 import ListItems from "../ListItems/ListItems";
-import Local from './../../../Uitils/LocalStoredge';
+import Local from "./../../../Uitils/LocalStoredge";
 export default function ProductList() {
   const [products, setProducts] = useState(Local());
 
@@ -19,20 +19,28 @@ export default function ProductList() {
 
       element.value = "";
     });
-    if (existingID.includes(formObject.id) ) {
+    if (existingID.includes(formObject.id)) {
       alert("Please input unique number");
+    }
+    if (formObject.price <= 0) {
+      alert("Enter positive number in price");
+
+    }
+    if (formObject.quantity <= 0) {
+      alert("Enter positive number in quantity");
+
     } else {
       setProducts([...products, formObject]);
     }
   };
 
-  // useEffect(() => {
-  //   console.log(products);
-  // }, [products]);
+  useEffect(() => {
+    console.log(products);
+  }, [products]);
 
-  useEffect(()=>{
-    localStorage.setItem("products",JSON.stringify(products))
-  },[products])   
+  useEffect(() => {
+    localStorage.setItem("products", JSON.stringify(products));
+  }, [products]);
 
   return (
     <div className="form">
@@ -88,20 +96,23 @@ export default function ProductList() {
             </select>
           </label>
 
-          {/* <label>
+          <label>
             <input
               type="date"
               name="date"
             />
-          </label> */}
+          </label>
 
-          <button className="btn" type="submit">
-        Submit
-        <span className="first"></span>
-        <span className="second"></span>
-        <span className="third"></span>
-        <span className="fourth"></span>
-      </button>
+          <button
+            className="btn"
+            type="submit"
+          >
+            Submit
+            <span className="first"></span>
+            <span className="second"></span>
+            <span className="third"></span>
+            <span className="fourth"></span>
+          </button>
         </div>
       </form>
 
