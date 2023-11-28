@@ -1,5 +1,7 @@
 /* eslint-disable react/jsx-key */
+import { useEffect } from "react";
 import "./ListItems.css";
+import Local from './../../../Uitils/LocalStoredge';
 export default function ListItems({ products, setProducts }) {
   const handleDelete = (value) => {
     const filteredProducts = products.filter(
@@ -8,6 +10,8 @@ export default function ListItems({ products, setProducts }) {
     setProducts(filteredProducts);
     ``;
   };
+
+
   return (
     <>
 

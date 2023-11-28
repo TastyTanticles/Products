@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import "./ProductList.css";
 import ListItems from "../ListItems/ListItems";
+import Local from './../../../Uitils/LocalStoredge';
 export default function ProductList() {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(Local());
 
   const submitForm = (event) => {
     event.preventDefault();
@@ -18,15 +19,20 @@ export default function ProductList() {
 
       element.value = "";
     });
-    if (existingID.includes(formObject.id)) {
+    if (existingID.includes(formObject.id) ) {
       alert("Please input unique number");
     } else {
       setProducts([...products, formObject]);
     }
   };
-  useEffect(() => {
-    console.log(products);
-  }, [products]);
+
+  // useEffect(() => {
+  //   console.log(products);
+  // }, [products]);
+
+  useEffect(()=>{
+    localStorage.setItem("products",JSON.stringify(products))
+  },[products])   
 
   return (
     <div className="form">
