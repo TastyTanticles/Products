@@ -64,6 +64,7 @@ export default function ProductList() {
             Input your quantity:
             <input
             max='50'
+            placeholder="No more then 50"
             required
               type="number"
               name="quantity"
