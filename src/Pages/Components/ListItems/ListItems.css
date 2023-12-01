@@ -11,7 +11,6 @@ button {
   transition: all 0.7s;
   overflow: hidden;
   border-radius: 100px;
- 
 }
 
 button:hover {
@@ -98,4 +97,9 @@ button:hover .fourth {
   -webkit-box-shadow: -1px -1px 30px -6px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: -1px -1px 30px -6px rgba(0, 0, 0, 0.75);
   box-shadow: -1px -1px 30px -6px rgba(0, 0, 0, 0.75);
+}
+
+.textArea {
+  width: 150px;
+word-break: break-all;
 }

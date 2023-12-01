@@ -27,6 +27,8 @@ export default function ListItems({ products, setProducts }) {
               <p>Id: {value.id} </p>
               <p>Color: {value.color}</p>
               <p>Date: {value.date}</p>
+              <p>Size :{value.radio} </p>
+              <p className="textArea">Description: {value.text}</p>
               <button onClick={() => handleDelete(value)}>
                 Remove
                 <span className="first"></span>

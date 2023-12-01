@@ -4,6 +4,7 @@ import ListItems from "../ListItems/ListItems";
 import Local from "./../../../Uitils/LocalStoredge";
 export default function ProductList() {
   const [products, setProducts] = useState(Local());
+  const [selectedSize, setSelectedSize] = useState("");
 
   const submitForm = (event) => {
     event.preventDefault();
@@ -16,21 +17,16 @@ export default function ProductList() {
     elements.forEach((element) => {
       if (element.tagname !== "BUTTON")
         formObject[element.name] = element.value;
-
       element.value = "";
     });
+
     if (existingID.includes(formObject.id)) {
-      alert("Please input unique number");
+      return alert("Please input unique id number");
     }
-    if (formObject.price <= 0) {
-      alert("Enter positive number in price");
-
-    }
-    if (formObject.quantity <= 0) {
-      alert("Enter positive number in quantity");
-
-    } else {
+     else {
       setProducts([...products, formObject]);
+      formObject.radio = selectedSize;
+      selectedSize("");
     }
   };
 
@@ -41,7 +37,9 @@ export default function ProductList() {
   useEffect(() => {
     localStorage.setItem("products", JSON.stringify(products));
   }, [products]);
-
+  const sizeChange = (event) => {
+    setSelectedSize(event.target.value);
+  };
   return (
     <div className="form">
       <form onSubmit={submitForm}>
@@ -49,6 +47,7 @@ export default function ProductList() {
           <label>
             Please input your name:
             <input
+            required
               type="text"
               name="userName"
             />
@@ -56,6 +55,7 @@ export default function ProductList() {
           <label>
             Input product name:
             <input
+            required
               type="text"
               name="productName"
             />
@@ -63,6 +63,8 @@ export default function ProductList() {
           <label>
             Input your quantity:
             <input
+            max='50'
+            required
               type="number"
               name="quantity"
             />
@@ -70,21 +72,28 @@ export default function ProductList() {
           <label>
             Input your price:
             <input
+            required
               type="number"
               name="price"
             />
           </label>
+
           <label>
             Input your Product ID:
             <input
+            required
               type="text"
               name="id"
               placeholder="Must Be unique"
             />
           </label>
+
+        
+
           <label>
             Choose your color:
             <select
+            required
               name="color"
               id=""
             >
@@ -95,11 +104,63 @@ export default function ProductList() {
               <option value={"Hula"}>Hula</option>
             </select>
           </label>
-
           <label>
             <input
               type="date"
               name="date"
+            />
+          </label>
+
+          <label>
+            M-Size
+            <input
+            
+              onChange={sizeChange}
+              type="radio"
+              name="radio"
+              value="M-Size"
+              checked={selectedSize === "M-Size"}
+            />
+          </label>
+          <label>
+            L-Size
+            <input
+              onChange={sizeChange}
+              type="radio"
+              name="radio"
+              value="L-Size"
+              checked={selectedSize === "L-Size"}
+            />
+          </label>
+          <label>
+            XL-Size
+            <input
+              onChange={sizeChange}
+              type="radio"
+              name="radio"
+              value="XL-Size"
+              checked={selectedSize === "XL-Size"}
+            />
+          </label>
+
+          <label>
+            Product Description:
+            <textarea
+            placeholder="Optional"
+            // maxLength='11'
+              name="text"
+              rows="3"
+              cols="30"
+              style={{ resize: "none" 
+              }}
+              wrap="hard"
+            ></textarea>
+          </label>
+          <label>
+            Terms&Conditions
+            <input
+            required
+             type="checkBox"
             />
           </label>
 
